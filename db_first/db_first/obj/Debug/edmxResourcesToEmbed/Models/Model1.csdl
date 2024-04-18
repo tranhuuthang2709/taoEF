@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_fisrtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Khoa">
+    <Key>
+      <PropertyRef Name="IdKhoa" />
+    </Key>
+    <Property Name="IdKhoa" Type="Int32" Nullable="false" />
+    <Property Name="TenKhoa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Lop" Relationship="Self.FK__Lop__IdKhoa__25869641" FromRole="Khoa" ToRole="Lop" />
+  </EntityType>
+  <EntityType Name="Lop">
+    <Key>
+      <PropertyRef Name="IdLop" />
+    </Key>
+    <Property Name="IdLop" Type="Int32" Nullable="false" />
+    <Property Name="TenLop" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IdKhoa" Type="Int32" />
+    <NavigationProperty Name="Khoa" Relationship="Self.FK__Lop__IdKhoa__25869641" FromRole="Lop" ToRole="Khoa" />
+    <NavigationProperty Name="Sv" Relationship="Self.FK__Sv__IdLop__286302EC" FromRole="Lop" ToRole="Sv" />
+  </EntityType>
+  <EntityType Name="Sv">
+    <Key>
+      <PropertyRef Name="IdSv" />
+    </Key>
+    <Property Name="IdSv" Type="Int32" Nullable="false" />
+    <Property Name="TenSv" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Tuoi" Type="Int32" />
+    <Property Name="IdLop" Type="Int32" />
+    <NavigationProperty Name="Lop" Relationship="Self.FK__Sv__IdLop__286302EC" FromRole="Sv" ToRole="Lop" />
+  </EntityType>
+  <Association Name="FK__Lop__IdKhoa__25869641">
+    <End Role="Khoa" Type="Self.Khoa" Multiplicity="0..1" />
+    <End Role="Lop" Type="Self.Lop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Khoa">
+        <PropertyRef Name="IdKhoa" />
+      </Principal>
+      <Dependent Role="Lop">
+        <PropertyRef Name="IdKhoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sv__IdLop__286302EC">
+    <End Role="Lop" Type="Self.Lop" Multiplicity="0..1" />
+    <End Role="Sv" Type="Self.Sv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lop">
+        <PropertyRef Name="IdLop" />
+      </Principal>
+      <Dependent Role="Sv">
+        <PropertyRef Name="IdLop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_fisrtEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Khoa" EntityType="Self.Khoa" />
+    <EntitySet Name="Lop" EntityType="Self.Lop" />
+    <EntitySet Name="Sv" EntityType="Self.Sv" />
+    <AssociationSet Name="FK__Lop__IdKhoa__25869641" Association="Self.FK__Lop__IdKhoa__25869641">
+      <End Role="Khoa" EntitySet="Khoa" />
+      <End Role="Lop" EntitySet="Lop" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sv__IdLop__286302EC" Association="Self.FK__Sv__IdLop__286302EC">
+      <End Role="Lop" EntitySet="Lop" />
+      <End Role="Sv" EntitySet="Sv" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

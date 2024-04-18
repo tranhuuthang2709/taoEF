@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_fisrtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Khoa">
+    <Key>
+      <PropertyRef Name="IdKhoa" />
+    </Key>
+    <Property Name="IdKhoa" Type="int" Nullable="false" />
+    <Property Name="TenKhoa" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Lop">
+    <Key>
+      <PropertyRef Name="IdLop" />
+    </Key>
+    <Property Name="IdLop" Type="int" Nullable="false" />
+    <Property Name="TenLop" Type="varchar" MaxLength="255" />
+    <Property Name="IdKhoa" Type="int" />
+  </EntityType>
+  <EntityType Name="Sv">
+    <Key>
+      <PropertyRef Name="IdSv" />
+    </Key>
+    <Property Name="IdSv" Type="int" Nullable="false" />
+    <Property Name="TenSv" Type="varchar" MaxLength="255" />
+    <Property Name="Tuoi" Type="int" />
+    <Property Name="IdLop" Type="int" />
+  </EntityType>
+  <Association Name="FK__Lop__IdKhoa__25869641">
+    <End Role="Khoa" Type="Self.Khoa" Multiplicity="0..1" />
+    <End Role="Lop" Type="Self.Lop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Khoa">
+        <PropertyRef Name="IdKhoa" />
+      </Principal>
+      <Dependent Role="Lop">
+        <PropertyRef Name="IdKhoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sv__IdLop__286302EC">
+    <End Role="Lop" Type="Self.Lop" Multiplicity="0..1" />
+    <End Role="Sv" Type="Self.Sv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lop">
+        <PropertyRef Name="IdLop" />
+      </Principal>
+      <Dependent Role="Sv">
+        <PropertyRef Name="IdLop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_fisrtModelStoreContainer">
+    <EntitySet Name="Khoa" EntityType="Self.Khoa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lop" EntityType="Self.Lop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sv" EntityType="Self.Sv" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Lop__IdKhoa__25869641" Association="Self.FK__Lop__IdKhoa__25869641">
+      <End Role="Khoa" EntitySet="Khoa" />
+      <End Role="Lop" EntitySet="Lop" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sv__IdLop__286302EC" Association="Self.FK__Sv__IdLop__286302EC">
+      <End Role="Lop" EntitySet="Lop" />
+      <End Role="Sv" EntitySet="Sv" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

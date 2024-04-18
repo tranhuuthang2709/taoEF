@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_fisrtModelStoreContainer" CdmEntityContainer="db_fisrtEntities">
+    <EntitySetMapping Name="Khoa">
+      <EntityTypeMapping TypeName="db_fisrtModel.Khoa">
+        <MappingFragment StoreEntitySet="Khoa">
+          <ScalarProperty Name="IdKhoa" ColumnName="IdKhoa" />
+          <ScalarProperty Name="TenKhoa" ColumnName="TenKhoa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lop">
+      <EntityTypeMapping TypeName="db_fisrtModel.Lop">
+        <MappingFragment StoreEntitySet="Lop">
+          <ScalarProperty Name="IdLop" ColumnName="IdLop" />
+          <ScalarProperty Name="TenLop" ColumnName="TenLop" />
+          <ScalarProperty Name="IdKhoa" ColumnName="IdKhoa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sv">
+      <EntityTypeMapping TypeName="db_fisrtModel.Sv">
+        <MappingFragment StoreEntitySet="Sv">
+          <ScalarProperty Name="IdSv" ColumnName="IdSv" />
+          <ScalarProperty Name="TenSv" ColumnName="TenSv" />
+          <ScalarProperty Name="Tuoi" ColumnName="Tuoi" />
+          <ScalarProperty Name="IdLop" ColumnName="IdLop" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

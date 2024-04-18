@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_fisrtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Khoa">
+          <Key>
+            <PropertyRef Name="IdKhoa" />
+          </Key>
+          <Property Name="IdKhoa" Type="int" Nullable="false" />
+          <Property Name="TenKhoa" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Lop">
+          <Key>
+            <PropertyRef Name="IdLop" />
+          </Key>
+          <Property Name="IdLop" Type="int" Nullable="false" />
+          <Property Name="TenLop" Type="varchar" MaxLength="255" />
+          <Property Name="IdKhoa" Type="int" />
+        </EntityType>
+        <EntityType Name="Sv">
+          <Key>
+            <PropertyRef Name="IdSv" />
+          </Key>
+          <Property Name="IdSv" Type="int" Nullable="false" />
+          <Property Name="TenSv" Type="varchar" MaxLength="255" />
+          <Property Name="Tuoi" Type="int" />
+          <Property Name="IdLop" Type="int" />
+        </EntityType>
+        <Association Name="FK__Lop__IdKhoa__25869641">
+          <End Role="Khoa" Type="Self.Khoa" Multiplicity="0..1" />
+          <End Role="Lop" Type="Self.Lop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoa">
+              <PropertyRef Name="IdKhoa" />
+            </Principal>
+            <Dependent Role="Lop">
+              <PropertyRef Name="IdKhoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sv__IdLop__286302EC">
+          <End Role="Lop" Type="Self.Lop" Multiplicity="0..1" />
+          <End Role="Sv" Type="Self.Sv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lop">
+              <PropertyRef Name="IdLop" />
+            </Principal>
+            <Dependent Role="Sv">
+              <PropertyRef Name="IdLop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_fisrtModelStoreContainer">
+          <EntitySet Name="Khoa" EntityType="Self.Khoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lop" EntityType="Self.Lop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sv" EntityType="Self.Sv" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Lop__IdKhoa__25869641" Association="Self.FK__Lop__IdKhoa__25869641">
+            <End Role="Khoa" EntitySet="Khoa" />
+            <End Role="Lop" EntitySet="Lop" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sv__IdLop__286302EC" Association="Self.FK__Sv__IdLop__286302EC">
+            <End Role="Lop" EntitySet="Lop" />
+            <End Role="Sv" EntitySet="Sv" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_fisrtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Khoa">
+          <Key>
+            <PropertyRef Name="IdKhoa" />
+          </Key>
+          <Property Name="IdKhoa" Type="Int32" Nullable="false" />
+          <Property Name="TenKhoa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lop" Relationship="Self.FK__Lop__IdKhoa__25869641" FromRole="Khoa" ToRole="Lop" />
+        </EntityType>
+        <EntityType Name="Lop">
+          <Key>
+            <PropertyRef Name="IdLop" />
+          </Key>
+          <Property Name="IdLop" Type="Int32" Nullable="false" />
+          <Property Name="TenLop" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdKhoa" Type="Int32" />
+          <NavigationProperty Name="Khoa" Relationship="Self.FK__Lop__IdKhoa__25869641" FromRole="Lop" ToRole="Khoa" />
+          <NavigationProperty Name="Sv" Relationship="Self.FK__Sv__IdLop__286302EC" FromRole="Lop" ToRole="Sv" />
+        </EntityType>
+        <EntityType Name="Sv">
+          <Key>
+            <PropertyRef Name="IdSv" />
+          </Key>
+          <Property Name="IdSv" Type="Int32" Nullable="false" />
+          <Property Name="TenSv" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tuoi" Type="Int32" />
+          <Property Name="IdLop" Type="Int32" />
+          <NavigationProperty Name="Lop" Relationship="Self.FK__Sv__IdLop__286302EC" FromRole="Sv" ToRole="Lop" />
+        </EntityType>
+        <Association Name="FK__Lop__IdKhoa__25869641">
+          <End Role="Khoa" Type="Self.Khoa" Multiplicity="0..1" />
+          <End Role="Lop" Type="Self.Lop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoa">
+              <PropertyRef Name="IdKhoa" />
+            </Principal>
+            <Dependent Role="Lop">
+              <PropertyRef Name="IdKhoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sv__IdLop__286302EC">
+          <End Role="Lop" Type="Self.Lop" Multiplicity="0..1" />
+          <End Role="Sv" Type="Self.Sv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lop">
+              <PropertyRef Name="IdLop" />
+            </Principal>
+            <Dependent Role="Sv">
+              <PropertyRef Name="IdLop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_fisrtEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Khoa" EntityType="Self.Khoa" />
+          <EntitySet Name="Lop" EntityType="Self.Lop" />
+          <EntitySet Name="Sv" EntityType="Self.Sv" />
+          <AssociationSet Name="FK__Lop__IdKhoa__25869641" Association="Self.FK__Lop__IdKhoa__25869641">
+            <End Role="Khoa" EntitySet="Khoa" />
+            <End Role="Lop" EntitySet="Lop" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sv__IdLop__286302EC" Association="Self.FK__Sv__IdLop__286302EC">
+            <End Role="Lop" EntitySet="Lop" />
+            <End Role="Sv" EntitySet="Sv" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_fisrtModelStoreContainer" CdmEntityContainer="db_fisrtEntities">
+          <EntitySetMapping Name="Khoa">
+            <EntityTypeMapping TypeName="db_fisrtModel.Khoa">
+              <MappingFragment StoreEntitySet="Khoa">
+                <ScalarProperty Name="IdKhoa" ColumnName="IdKhoa" />
+                <ScalarProperty Name="TenKhoa" ColumnName="TenKhoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lop">
+            <EntityTypeMapping TypeName="db_fisrtModel.Lop">
+              <MappingFragment StoreEntitySet="Lop">
+                <ScalarProperty Name="IdLop" ColumnName="IdLop" />
+                <ScalarProperty Name="TenLop" ColumnName="TenLop" />
+                <ScalarProperty Name="IdKhoa" ColumnName="IdKhoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sv">
+            <EntityTypeMapping TypeName="db_fisrtModel.Sv">
+              <MappingFragment StoreEntitySet="Sv">
+                <ScalarProperty Name="IdSv" ColumnName="IdSv" />
+                <ScalarProperty Name="TenSv" ColumnName="TenSv" />
+                <ScalarProperty Name="Tuoi" ColumnName="Tuoi" />
+                <ScalarProperty Name="IdLop" ColumnName="IdLop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
